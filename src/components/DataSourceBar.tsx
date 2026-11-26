@@ -50,14 +50,14 @@ export const DataSourceBar: React.FC<DataSourceBarProps> = ({
                 value={inputUrl}
                 onChange={(e) => setInputUrl(e.target.value)}
                 placeholder="Paste Google Apps Script web app URL (https://script.google.com/macros/s/.../exec)"
-                className="w-full h-9 px-3 text-xs sm:text-sm bg-[#F5F7FB] border border-[#E3E7EF] rounded-lg text-[#1B2233] placeholder-[#5B6475] focus:bg-white transition-colors"
+                className="w-full h-9 px-3 text-xs sm:text-sm bg-[#FAF6EE] border border-[#E5D7C1] rounded-lg text-[#2B1B0E] placeholder-[#6B5744] focus:bg-white transition-colors"
               />
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <button
                 type="submit"
                 disabled={isLoading}
-                className="h-9 px-3.5 rounded-lg bg-[#22308F] text-white text-xs sm:text-sm font-medium hover:bg-[#1a256f] disabled:opacity-60 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                className="h-9 px-3.5 rounded-lg bg-[#533416] text-white text-xs sm:text-sm font-medium hover:bg-[#3F260E] disabled:opacity-60 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
               >
                 {isLoading ? 'Loading…' : 'Load URL'}
               </button>
@@ -65,37 +65,37 @@ export const DataSourceBar: React.FC<DataSourceBarProps> = ({
                 type="button"
                 onClick={onRefresh}
                 disabled={isLoading}
-                className="h-9 px-3 rounded-lg border border-[#E3E7EF] bg-white text-[#1B2233] text-xs sm:text-sm font-medium hover:bg-[#F5F7FB] disabled:opacity-60 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
+                className="h-9 px-3 rounded-lg border border-[#E5D7C1] bg-white text-[#2B1B0E] text-xs sm:text-sm font-medium hover:bg-[#FAF6EE] disabled:opacity-60 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
                 title="Refresh data from the active source"
               >
-                <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-3.5 h-3.5 text-[#533416] ${isLoading ? 'animate-spin' : ''}`} />
                 <span>Refresh</span>
               </button>
               <button
                 type="button"
                 onClick={onUseCase1Csv}
                 disabled={isLoading}
-                className="h-9 px-3 rounded-lg border border-[#E3E7EF] bg-white text-[#1B2233] text-xs sm:text-sm font-medium hover:bg-[#F5F7FB] disabled:opacity-60 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
+                className="h-9 px-3 rounded-lg border border-[#E5D7C1] bg-white text-[#2B1B0E] text-xs sm:text-sm font-medium hover:bg-[#FAF6EE] disabled:opacity-60 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
                 title="Load the attached Case 1 Metro Superstore CSV dataset"
               >
-                <FileSpreadsheet className="w-3.5 h-3.5 text-[#5B6475]" />
+                <FileSpreadsheet className="w-3.5 h-3.5 text-[#8F5109]" />
                 <span>Use Case 1 CSV</span>
               </button>
             </div>
           </form>
 
           {model && (
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#5B6475] lg:border-l lg:border-[#E3E7EF] lg:pl-3 shrink-0">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#6B5744] lg:border-l lg:border-[#E5D7C1] lg:pl-3 shrink-0">
               {model.sourceType === 'csv' ? (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#EEF1FB] text-[#22308F] font-semibold">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#EEDFC7] text-[#533416] font-semibold">
                   Case 1 CSV
                 </span>
               ) : model.sourceType === 'sample' ? (
-                <span className="inline-flex items-center px-2 py-0.5 rounded bg-[#EEF1FB] text-[#22308F] font-semibold">
+                <span className="inline-flex items-center px-2 py-0.5 rounded bg-[#EEDFC7] text-[#533416] font-semibold">
                   Sample data
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 text-[#0F9D8A] font-semibold">
+                <span className="inline-flex items-center gap-1 text-[#607938] font-semibold">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Live sheet
                 </span>
@@ -110,7 +110,7 @@ export const DataSourceBar: React.FC<DataSourceBarProps> = ({
                   <button
                     type="button"
                     onClick={onViewFlaggedTransactions}
-                    className="text-[#C8372D] font-medium hover:underline cursor-pointer tabular-nums"
+                    className="text-[#B83A28] font-medium hover:underline cursor-pointer tabular-nums"
                   >
                     {model.flaggedCount.toLocaleString()} flagged
                   </button>
@@ -128,21 +128,21 @@ export const DataSourceBar: React.FC<DataSourceBarProps> = ({
       {error && (
         <div
           role="alert"
-          className="rounded-[14px] border border-[#F2C6C3] bg-[#FEF2F2] px-4 py-3 flex flex-col sm:flex-row sm:items-start justify-between gap-3"
+          className="rounded-[14px] border border-[#EBC5BE] bg-[#FDF1EE] px-4 py-3 flex flex-col sm:flex-row sm:items-start justify-between gap-3"
         >
           <div className="flex items-start gap-2.5 min-w-0">
-            <AlertTriangle className="w-4 h-4 text-[#C8372D] mt-0.5 shrink-0" />
-            <div className="text-xs sm:text-sm text-[#1B2233] space-y-1 min-w-0">
-              <p className="font-semibold text-[#C8372D]">{error.title}</p>
-              <p className="text-[#5B6475]">{error.message}</p>
+            <AlertTriangle className="w-4 h-4 text-[#B83A28] mt-0.5 shrink-0" />
+            <div className="text-xs sm:text-sm text-[#2B1B0E] space-y-1 min-w-0">
+              <p className="font-semibold text-[#B83A28]">{error.title}</p>
+              <p className="text-[#6B5744]">{error.message}</p>
               {error.missingColumns && error.missingColumns.length > 0 && (
-                <p className="text-xs text-[#1B2233] break-words">
+                <p className="text-xs text-[#2B1B0E] break-words">
                   <span className="font-semibold">Missing columns:</span>{' '}
                   {error.missingColumns.join(', ')}
                 </p>
               )}
               {model && (
-                <p className="text-xs text-[#5B6475]">
+                <p className="text-xs text-[#6B5744]">
                   Showing last good data ({model.sourceType === 'csv' ? 'Case 1 CSV' : model.sourceType === 'sample' ? 'Sample data' : model.sheetName}, loaded{' '}
                   {formatDateTimeDisplay(model.loadedAt)}).
                 </p>
@@ -153,7 +153,7 @@ export const DataSourceBar: React.FC<DataSourceBarProps> = ({
             <button
               type="button"
               onClick={onRefresh}
-              className="h-8 px-3 rounded-lg bg-[#C8372D] text-white text-xs font-medium hover:bg-[#a92c23] transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+              className="h-8 px-3 rounded-lg bg-[#B83A28] text-white text-xs font-medium hover:bg-[#992F20] transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Retry</span>
@@ -161,7 +161,7 @@ export const DataSourceBar: React.FC<DataSourceBarProps> = ({
             <button
               type="button"
               onClick={onUseCase1Csv}
-              className="h-8 px-3 rounded-lg border border-[#E3E7EF] bg-white text-[#1B2233] text-xs font-medium hover:bg-[#F5F7FB] transition-colors whitespace-nowrap cursor-pointer"
+              className="h-8 px-3 rounded-lg border border-[#E5D7C1] bg-white text-[#2B1B0E] text-xs font-medium hover:bg-[#FAF6EE] transition-colors whitespace-nowrap cursor-pointer"
             >
               Use Case 1 CSV
             </button>

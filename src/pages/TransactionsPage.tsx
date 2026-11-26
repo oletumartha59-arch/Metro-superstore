@@ -358,10 +358,10 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
   return (
     <section className="card-surface overflow-hidden flex flex-col">
       {/* Toolbar */}
-      <div className="px-5 py-4 border-b border-[#E3E7EF] flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+      <div className="px-5 py-4 border-b border-[#E5D7C1] flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         <div>
-          <h2 className="text-base font-semibold text-[#22308F]">Transactions Ledger</h2>
-          <p className="text-xs text-[#5B6475] tabular-nums mt-0.5">
+          <h2 className="text-base font-semibold text-[#533416]">Transactions Ledger</h2>
+          <p className="text-xs text-[#6B5744] tabular-nums mt-0.5">
             {totalRows === 0
               ? 'Showing 0 of 0 matching transactions'
               : `Showing ${showingFrom.toLocaleString()} to ${showingTo.toLocaleString()} of ${totalRows.toLocaleString()}`}
@@ -371,14 +371,14 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
         <div className="flex flex-wrap items-center gap-2">
           {/* Search */}
           <div className="relative">
-            <Search className="w-3.5 h-3.5 text-[#5B6475] absolute left-2.5 top-2.5" />
+            <Search className="w-3.5 h-3.5 text-[#6B5744] absolute left-2.5 top-2.5" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search Transaction ID, Order ID, Product, Salesperson…"
               aria-label="Search transactions"
-              className="h-8 w-64 sm:w-72 pl-8 pr-3 text-xs border border-[#E3E7EF] rounded-lg bg-[#F5F7FB] text-[#1B2233] placeholder-[#5B6475] focus:bg-white"
+              className="h-8 w-64 sm:w-72 pl-8 pr-3 text-xs border border-[#E5D7C1] rounded-lg bg-[#FAF6EE] text-[#2B1B0E] placeholder-[#6B5744] focus:bg-white"
             />
           </div>
 
@@ -388,8 +388,8 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
             onClick={() => setFlaggedOnly((f) => !f)}
             className={`h-8 px-2.5 rounded-lg border text-xs font-medium inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
               flaggedOnly
-                ? 'border-[#C8372D] bg-[#FEF2F2] text-[#C8372D]'
-                : 'border-[#E3E7EF] bg-white text-[#1B2233] hover:bg-[#F5F7FB]'
+                ? 'border-[#B83A28] bg-[#FDF1EE] text-[#B83A28]'
+                : 'border-[#E5D7C1] bg-white text-[#2B1B0E] hover:bg-[#FAF6EE]'
             }`}
           >
             <Flag className="w-3.5 h-3.5" />
@@ -403,25 +403,25 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
             <button
               type="button"
               onClick={() => setColMenuOpen((o) => !o)}
-              className="h-8 px-2.5 rounded-lg border border-[#E3E7EF] bg-white text-xs font-medium text-[#1B2233] hover:bg-[#F5F7FB] inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+              className="h-8 px-2.5 rounded-lg border border-[#E5D7C1] bg-white text-xs font-medium text-[#2B1B0E] hover:bg-[#FAF6EE] inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
             >
-              <Columns3 className="w-3.5 h-3.5 text-[#5B6475]" />
+              <Columns3 className="w-3.5 h-3.5 text-[#6B5744]" />
               <span>Columns</span>
             </button>
             {colMenuOpen && (
-              <div className="absolute right-0 top-full mt-1.5 w-52 rounded-[12px] border border-[#E3E7EF] bg-white shadow-lg z-40 p-2 max-h-72 overflow-y-auto">
+              <div className="absolute right-0 top-full mt-1.5 w-52 rounded-[12px] border border-[#E5D7C1] bg-white shadow-lg z-40 p-2 max-h-72 overflow-y-auto">
                 {COLUMNS.map((c) => {
                   const checked = visibleColIds.includes(c.id);
                   return (
                     <label
                       key={c.id}
-                      className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-[#F5F7FB] cursor-pointer text-xs text-[#1B2233]"
+                      className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-[#FAF6EE] cursor-pointer text-xs text-[#2B1B0E]"
                     >
                       <input
                         type="checkbox"
                         checked={checked}
                         onChange={() => toggleColumn(c.id)}
-                        className="rounded border-[#E3E7EF] text-[#22308F]"
+                        className="rounded border-[#E5D7C1] accent-[#533416]"
                       />
                       <span>{c.label}</span>
                     </label>
@@ -436,7 +436,7 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
             type="button"
             onClick={handleExportCsv}
             disabled={displayedRows.length === 0}
-            className="h-8 px-3 rounded-lg bg-[#22308F] text-white text-xs font-medium hover:bg-[#1a256f] disabled:opacity-50 inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+            className="h-8 px-3 rounded-lg bg-[#533416] text-white text-xs font-medium hover:bg-[#3F260E] disabled:opacity-50 inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export Filtered CSV</span>
@@ -453,7 +453,7 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
       >
         <div style={{ minWidth: totalWidth }}>
           {/* Sticky Header */}
-          <div className="sticky top-0 z-20 flex bg-[#F5F7FB] border-b border-[#E3E7EF] text-xs font-semibold text-[#5B6475]">
+          <div className="sticky top-0 z-20 flex bg-[#F5EDE0] border-b border-[#E5D7C1] text-xs font-semibold text-[#6B5744]">
             {activeColumns.map((col) => {
               const isSorted = sortCol === col.id;
               return (
@@ -462,16 +462,16 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
                   type="button"
                   onClick={() => handleSort(col.id)}
                   style={{ width: col.widthPx }}
-                  className={`shrink-0 px-3 py-2.5 flex items-center gap-1 hover:text-[#1B2233] cursor-pointer ${
+                  className={`shrink-0 px-3 py-2.5 flex items-center gap-1 hover:text-[#2B1B0E] cursor-pointer ${
                     col.align === 'right' ? 'justify-end' : 'justify-start'
                   }`}
                 >
                   <span className="truncate">{col.label}</span>
                   {isSorted ? (
                     sortDir === 'asc' ? (
-                      <ArrowUp className="w-3 h-3 text-[#22308F] shrink-0" />
+                      <ArrowUp className="w-3 h-3 text-[#8F5109] shrink-0" />
                     ) : (
-                      <ArrowDown className="w-3 h-3 text-[#22308F] shrink-0" />
+                      <ArrowDown className="w-3 h-3 text-[#8F5109] shrink-0" />
                     )
                   ) : null}
                 </button>
@@ -481,7 +481,7 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
 
           {/* Empty State */}
           {totalRows === 0 ? (
-            <div className="py-16 text-center text-sm text-[#5B6475]">
+            <div className="py-16 text-center text-sm text-[#6B5744]">
               No transactions match these filters
             </div>
           ) : (
@@ -502,10 +502,10 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
                           ? `Row ${row.rowIndex}: ${row.validationDetails.join(' | ')}`
                           : undefined
                       }
-                      className={`flex items-center border-b border-[#EEF1F6] text-xs ${
+                      className={`flex items-center border-b border-[#EFE5D6] text-xs ${
                         isFlagged
-                          ? 'bg-[#FEF2F2] hover:bg-[#FDE8E8]'
-                          : 'bg-white hover:bg-[#F5F7FB]'
+                          ? 'bg-[#FDF4F2] hover:bg-[#FAE7E3]'
+                          : 'bg-white hover:bg-[#FAF6EE]'
                       }`}
                     >
                       {activeColumns.map((col) => {
@@ -518,10 +518,10 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({
                               col.align === 'right' ? 'text-right tabular-nums' : 'text-left'
                             } ${
                               col.id === 'flags' && isFlagged
-                                ? 'text-[#C8372D] font-semibold'
+                                ? 'text-[#B83A28] font-semibold'
                                 : col.id === 'flags'
-                                  ? 'text-[#0F9D8A] font-medium'
-                                  : 'text-[#1B2233]'
+                                  ? 'text-[#607938] font-semibold'
+                                  : 'text-[#2B1B0E]'
                             }`}
                             title={
                               col.id === 'flags' && isFlagged

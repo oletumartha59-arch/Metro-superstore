@@ -50,11 +50,11 @@ export const StoresPage: React.FC<StoresPageProps> = ({
           const st = stores[idx];
           if (!st) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${st.store} (${st.province})</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${st.store} (${st.province})</div>
             <div>Net Sales: <b>${formatCADFull(st.sales)}</b></div>
             <div>vs Store Avg: <b>${formatPercent(st.vsAveragePct, { signed: true })}</b></div>
             <div>Status: <b>${st.isUnderperforming ? 'Underperforming' : 'On Track'}</b></div>
-            <div style="color:#5B6475;margin-top:2px;">${st.underperformingReason}</div>
+            <div style="color:${CHART_COLORS.muted};margin-top:2px;">${st.underperformingReason}</div>
           `;
         },
       },
@@ -82,7 +82,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({
           data: stores.map((s) => ({
             value: Number(s.sales.toFixed(2)),
             itemStyle: {
-              color: s.isUnderperforming ? CHART_COLORS.red : CHART_COLORS.navy,
+              color: s.isUnderperforming ? CHART_COLORS.red : CHART_COLORS.espresso,
               borderRadius: [0, 4, 4, 0],
             },
           })),
@@ -100,10 +100,11 @@ export const StoresPage: React.FC<StoresPageProps> = ({
                   label: {
                     formatter: `Avg ${formatCAD(storeAverageSales, true)}`,
                     position: 'insideEndTop',
-                    color: CHART_COLORS.muted,
+                    color: CHART_COLORS.amberText,
                     fontSize: 10,
+                    fontWeight: 600,
                   },
-                  lineStyle: { type: 'dashed', color: CHART_COLORS.slate },
+                  lineStyle: { type: 'dashed', color: CHART_COLORS.amber, width: 1.5 },
                   data: [{ xAxis: Number(storeAverageSales.toFixed(2)) }],
                 }
               : undefined,
@@ -141,10 +142,10 @@ export const StoresPage: React.FC<StoresPageProps> = ({
           const p = params as { value: [number, number, number, number, number] };
           const [xi, yi, val, orders, small] = p.value;
           return `
-            <div style="font-weight:600;margin-bottom:2px;">${storeNames[yi]} · ${catNames[xi]}</div>
+            <div style="font-weight:600;margin-bottom:2px;color:${CHART_COLORS.espresso};">${storeNames[yi]} · ${catNames[xi]}</div>
             <div>Net Sales: <b>${formatCADFull(val)}</b></div>
             <div>Orders: <b>${formatNumber(orders)}</b>${
-              small === 1 ? ' <span style="color:#C8372D;">(small sample)</span>' : ''
+              small === 1 ? ` <span style="color:${CHART_COLORS.red};">(small sample)</span>` : ''
             }</div>
           `;
         },
@@ -166,7 +167,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({
         min: 0,
         max: maxVal > 0 ? maxVal : 1,
         inRange: {
-          color: ['#F5F7FB', '#C5D0F0', '#8FA3E8', '#22308F'],
+          color: ['#FAF6EE', '#EEDFC7', '#DFB67E', '#CE7F20'],
         },
       },
       series: [
@@ -208,7 +209,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({
           const pt = selectedTrend[idx];
           if (!pt) return '';
           return `
-            <div style="font-weight:600;margin-bottom:2px;">${selectedStore} · ${pt.label}</div>
+            <div style="font-weight:600;margin-bottom:2px;color:${CHART_COLORS.espresso};">${selectedStore} · ${pt.label}</div>
             <div>Net Sales: <b>${formatCADFull(pt.sales)}</b></div>
             <div>Quantity: <b>${formatNumber(pt.quantity)}</b> units</div>
             <div>Orders: <b>${formatNumber(pt.orders)}</b></div>
@@ -233,7 +234,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({
           name: 'Monthly Net Sales',
           type: 'bar',
           barMaxWidth: 28,
-          itemStyle: { color: CHART_COLORS.navy, borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: CHART_COLORS.olive, borderRadius: [4, 4, 0, 0] },
           data: selectedTrend.map((t) => Number(t.sales.toFixed(2))),
           label: {
             show: selectedTrend.length <= 14,
@@ -252,23 +253,23 @@ export const StoresPage: React.FC<StoresPageProps> = ({
       {/* Rule Control Banner */}
       <div className="card-surface p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <h2 className="text-base font-semibold text-[#22308F]">
+          <h2 className="text-base font-semibold text-[#533416]">
             Store Performance &amp; Underperforming Detection
           </h2>
-          <p className="text-xs sm:text-sm text-[#5B6475]">
-            A store is flagged <span className="font-semibold text-[#C8372D]">Underperforming</span>{' '}
+          <p className="text-xs sm:text-sm text-[#6B5744]">
+            A store is flagged <span className="font-semibold text-[#B83A28]">Underperforming</span>{' '}
             when its net sales are more than{' '}
-            <span className="font-semibold text-[#1B2233] tabular-nums">{thresholdPct}%</span>{' '}
+            <span className="font-semibold text-[#2B1B0E] tabular-nums">{thresholdPct}%</span>{' '}
             below the store average (<ValueOrNa value={formatCAD(storeAverageSales)} />) AND/OR its sales have fallen
             versus the previous period. Groups with fewer than 5 orders are marked{' '}
             <span className="italic">small sample</span>.
           </p>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0 bg-[#F5F7FB] px-3.5 py-2 rounded-lg border border-[#E3E7EF]">
+        <div className="flex items-center gap-3 shrink-0 bg-[#F5EDE0] px-3.5 py-2 rounded-lg border border-[#E5D7C1]">
           <label
             htmlFor="underperforming-threshold"
-            className="text-xs font-medium text-[#1B2233] whitespace-nowrap"
+            className="text-xs font-medium text-[#2B1B0E] whitespace-nowrap"
           >
             Below-average threshold:
           </label>
@@ -280,9 +281,9 @@ export const StoresPage: React.FC<StoresPageProps> = ({
             step={5}
             value={thresholdPct}
             onChange={(e) => onChangeThresholdPct(Number(e.target.value))}
-            className="w-24 accent-[#22308F] cursor-pointer"
+            className="w-24 accent-[#533416] cursor-pointer"
           />
-          <span className="text-sm font-semibold text-[#22308F] tabular-nums w-10 text-right">
+          <span className="text-sm font-semibold text-[#533416] tabular-nums w-10 text-right">
             {thresholdPct}%
           </span>
         </div>
@@ -318,7 +319,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({
                 aria-label="Select store for monthly trend"
                 value={selectedStore}
                 onChange={(e) => setSelectedStore(e.target.value)}
-                className="h-8 px-2.5 text-xs border border-[#E3E7EF] rounded-lg bg-white text-[#1B2233]"
+                className="h-8 px-2.5 text-xs border border-[#E5D7C1] rounded-lg bg-white text-[#2B1B0E]"
               >
                 {stores.map((s) => (
                   <option key={s.store} value={s.store}>
@@ -343,14 +344,14 @@ export const StoresPage: React.FC<StoresPageProps> = ({
 
       {/* Ranked Store Table */}
       <section className="card-surface overflow-hidden">
-        <div className="px-5 py-4 border-b border-[#E3E7EF] flex flex-wrap items-center justify-between gap-2">
+        <div className="px-5 py-4 border-b border-[#E5D7C1] flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h3 className="text-[15px] font-semibold text-[#22308F]">Store Rankings &amp; Diagnostics</h3>
-            <p className="text-xs text-[#5B6475]">
+            <h3 className="text-[15px] font-semibold text-[#533416]">Store Rankings &amp; Diagnostics</h3>
+            <p className="text-xs text-[#6B5744]">
               Click any store row to toggle store filter everywhere
             </p>
           </div>
-          <span className="text-xs text-[#5B6475] tabular-nums">
+          <span className="text-xs px-2.5 py-0.5 rounded-md bg-[#EEDFC7] text-[#533416] font-semibold tabular-nums">
             {stores.filter((s) => s.isUnderperforming).length} of {stores.length} flagged
           </span>
         </div>
@@ -358,7 +359,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr className="bg-[#F5F7FB] border-b border-[#E3E7EF] text-xs font-semibold text-[#5B6475]">
+              <tr className="bg-[#F5EDE0] border-b border-[#E5D7C1] text-xs font-semibold text-[#6B5744]">
                 <th className="py-2.5 px-4">Store</th>
                 <th className="py-2.5 px-3 text-right">Sales (CAD)</th>
                 <th className="py-2.5 px-3 text-right">Share</th>
@@ -371,10 +372,10 @@ export const StoresPage: React.FC<StoresPageProps> = ({
                 <th className="py-2.5 px-4">Status &amp; Reason</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EEF1F6]">
+            <tbody className="divide-y divide-[#EFE5D6]">
               {stores.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="py-8 text-center text-sm text-[#5B6475]">
+                  <td colSpan={10} className="py-8 text-center text-sm text-[#6B5744]">
                     No transactions match these filters
                   </td>
                 </tr>
@@ -386,24 +387,24 @@ export const StoresPage: React.FC<StoresPageProps> = ({
                       setSelectedStore(s.store);
                       onToggleStoreFilter(s.store);
                     }}
-                    className={`cursor-pointer transition-colors hover:bg-[#F5F7FB] ${
-                      s.isUnderperforming ? 'bg-[#FEF8F8]' : ''
+                    className={`cursor-pointer transition-colors hover:bg-[#FAF6EE] ${
+                      s.isUnderperforming ? 'bg-[#FDF4F2]' : ''
                     }`}
                   >
-                    <td className="py-2.5 px-4 font-medium text-[#1B2233] whitespace-nowrap">
+                    <td className="py-2.5 px-4 font-medium text-[#2B1B0E] whitespace-nowrap">
                       {s.store}{' '}
-                      <span className="text-xs text-[#5B6475] font-normal">({s.province})</span>
+                      <span className="text-xs text-[#6B5744] font-normal">({s.province})</span>
                     </td>
                     <td className="py-2.5 px-3 text-right tabular-nums font-medium">
                       <ValueOrNa value={formatCAD(s.sales)} />
                     </td>
-                    <td className="py-2.5 px-3 text-right tabular-nums text-[#5B6475]">
+                    <td className="py-2.5 px-3 text-right tabular-nums text-[#6B5744]">
                       <ValueOrNa value={formatPercent(s.sharePct)} />
                     </td>
                     <td className="py-2.5 px-3 text-right tabular-nums">
                       {formatNumber(s.orders)}
                       {s.isSmallSample && (
-                        <span className="block text-[10px] text-[#C8372D]">small sample</span>
+                        <span className="block text-[10px] text-[#B83A28]">small sample</span>
                       )}
                     </td>
                     <td className="py-2.5 px-3 text-right tabular-nums">
@@ -418,10 +419,10 @@ export const StoresPage: React.FC<StoresPageProps> = ({
                     <td
                       className={`py-2.5 px-3 text-right tabular-nums font-medium ${
                         s.changeVsPriorPct === null
-                          ? 'text-[#5B6475]'
+                          ? 'text-[#6B5744]'
                           : s.changeVsPriorPct >= 0
-                            ? 'text-[#0F9D8A]'
-                            : 'text-[#C8372D]'
+                            ? 'text-[#607938]'
+                            : 'text-[#B83A28]'
                       }`}
                     >
                       <ValueOrNa value={formatPercent(s.changeVsPriorPct, { signed: true })} />
@@ -429,10 +430,10 @@ export const StoresPage: React.FC<StoresPageProps> = ({
                     <td
                       className={`py-2.5 px-3 text-right tabular-nums font-medium ${
                         s.changeVsYoyPct === null
-                          ? 'text-[#5B6475]'
+                          ? 'text-[#6B5744]'
                           : s.changeVsYoyPct >= 0
-                            ? 'text-[#0F9D8A]'
-                            : 'text-[#C8372D]'
+                            ? 'text-[#607938]'
+                            : 'text-[#B83A28]'
                       }`}
                     >
                       <ValueOrNa value={formatPercent(s.changeVsYoyPct, { signed: true })} />
@@ -440,11 +441,11 @@ export const StoresPage: React.FC<StoresPageProps> = ({
                     <td className="py-2.5 px-4 text-xs">
                       {s.isUnderperforming ? (
                         <div>
-                          <span className="font-semibold text-[#C8372D]">Underperforming</span>
-                          <p className="text-[#5B6475] mt-0.5">{s.underperformingReason}</p>
+                          <span className="font-semibold text-[#B83A28]">Underperforming</span>
+                          <p className="text-[#6B5744] mt-0.5">{s.underperformingReason}</p>
                         </div>
                       ) : (
-                        <span className="font-medium text-[#0F9D8A]">On track</span>
+                        <span className="font-semibold text-[#607938]">On track</span>
                       )}
                     </td>
                   </tr>

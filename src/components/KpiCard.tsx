@@ -31,9 +31,9 @@ export const KpiCard: React.FC<KpiCardProps> = ({
   const isDown = hasChange && changePct < 0;
 
   return (
-    <div className="card-surface px-4 py-3.5 flex items-center gap-3.5 min-w-0">
+    <div className="card-surface px-4 py-3.5 flex items-center gap-3.5 min-w-0 border-t-2 border-t-[#CE7F20]">
       <div
-        className="w-10 h-10 rounded-xl bg-[#FDF2F2] text-[#C8372D] flex items-center justify-center shrink-0"
+        className="w-10 h-10 rounded-xl bg-[#EEDFC7] border border-[#DFC9A6] text-[#533416] flex items-center justify-center shrink-0"
         aria-hidden="true"
       >
         {icon}
@@ -41,9 +41,9 @@ export const KpiCard: React.FC<KpiCardProps> = ({
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-medium text-[#5B6475] truncate">{label}</span>
+          <span className="text-xs font-medium text-[#6B5744] truncate">{label}</span>
           {topRightBadge ? (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#FDF2F2] text-[#C8372D] tabular-nums shrink-0">
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#EEDFC7] text-[#533416] tabular-nums shrink-0">
               {topRightBadge}
             </span>
           ) : null}
@@ -51,7 +51,7 @@ export const KpiCard: React.FC<KpiCardProps> = ({
 
         <div className="mt-1 flex items-baseline gap-2 flex-wrap">
           <span
-            className="text-2xl sm:text-[26px] leading-tight font-semibold text-[#1B2233] tabular-nums"
+            className="text-2xl sm:text-[26px] leading-tight font-bold text-[#2B1B0E] tabular-nums"
             title={fullValueTooltip || valueDisplay}
           >
             <ValueOrNa value={valueDisplay} />
@@ -61,10 +61,10 @@ export const KpiCard: React.FC<KpiCardProps> = ({
             <span
               className={`inline-flex items-center gap-0.5 text-xs font-semibold tabular-nums shrink-0 ${
                 isUp
-                  ? 'text-[#0F9D8A]'
+                  ? 'text-[#607938]'
                   : isDown
-                    ? 'text-[#C8372D]'
-                    : 'text-[#5B6475]'
+                    ? 'text-[#B83A28]'
+                    : 'text-[#6B5744]'
               }`}
               title={
                 comparisonLabel
@@ -87,7 +87,7 @@ export const KpiCard: React.FC<KpiCardProps> = ({
           )}
         </div>
 
-        <div className="mt-1 text-[11px] text-[#5B6475] tabular-nums flex items-center gap-1 flex-wrap">
+        <div className="mt-1 text-[11px] text-[#6B5744] tabular-nums flex items-center gap-1 flex-wrap">
           {secondaryNote ? (
             <>
               <span>{secondaryNote}</span>

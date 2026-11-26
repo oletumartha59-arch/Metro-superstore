@@ -66,7 +66,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           const p = trend[idx];
           if (!p) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${p.label}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${p.label}</div>
             <div>Net Sales: <b>${formatCADFull(p.sales)}</b></div>
             <div>Quantity: <b>${formatNumber(p.quantity)}</b> units</div>
             <div>Orders: <b>${formatNumber(p.orders)}</b></div>
@@ -115,7 +115,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           type: 'bar',
           yAxisIndex: 0,
           barMaxWidth: 32,
-          itemStyle: { color: CHART_COLORS.navy, borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: CHART_COLORS.espresso, borderRadius: [4, 4, 0, 0] },
           data: trend.map((t) => Number(t.sales.toFixed(2))),
           label: {
             show: trend.length <= 16,
@@ -127,7 +127,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           markPoint: peakPoint
             ? {
                 symbolSize: 42,
-                itemStyle: { color: CHART_COLORS.teal },
+                itemStyle: { color: CHART_COLORS.olive },
                 label: {
                   color: '#FFFFFF',
                   fontSize: 10,
@@ -150,8 +150,8 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           smooth: false,
           symbol: 'circle',
           symbolSize: 6,
-          lineStyle: { color: CHART_COLORS.teal, width: 2 },
-          itemStyle: { color: CHART_COLORS.teal },
+          lineStyle: { color: CHART_COLORS.amber, width: 2.5 },
+          itemStyle: { color: CHART_COLORS.amber },
           data: trend.map((t) => t.quantity),
         },
       ],
@@ -166,7 +166,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
         formatter: (params: unknown) => {
           const p = params as { name: string; value: number; percent: number };
           return `
-            <div style="font-weight:600;margin-bottom:2px;">${p.name}</div>
+            <div style="font-weight:600;margin-bottom:2px;color:${CHART_COLORS.espresso};">${p.name}</div>
             <div>Net Sales: <b>${formatCADFull(p.value)}</b></div>
             <div>Share: <b>${p.percent.toFixed(1)}%</b></div>
           `;
@@ -212,7 +212,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           const st = stores[idx];
           if (!st) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${st.store} (${st.province})</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${st.store} (${st.province})</div>
             <div>Net Sales: <b>${formatCADFull(st.sales)}</b></div>
             <div>Share: <b>${formatPercent(st.sharePct)}</b></div>
             <div>Orders: <b>${formatNumber(st.orders)}</b></div>
@@ -243,7 +243,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           data: stores.map((s) => ({
             value: Number(s.sales.toFixed(2)),
             itemStyle: {
-              color: s.isUnderperforming ? CHART_COLORS.red : CHART_COLORS.navy,
+              color: s.isUnderperforming ? CHART_COLORS.red : CHART_COLORS.espresso,
               borderRadius: [0, 4, 4, 0],
             },
           })),
@@ -272,7 +272,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           const prod = top10Products[idx];
           if (!prod) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${prod.product}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${prod.product}</div>
             <div>Category: ${prod.category}</div>
             <div>Net Sales: <b>${formatCADFull(prod.sales)}</b></div>
             <div>Units Sold: <b>${formatNumber(prod.quantity)}</b></div>
@@ -305,7 +305,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
           name: 'Net Sales (CAD)',
           type: 'bar',
           barMaxWidth: 20,
-          itemStyle: { color: CHART_COLORS.teal, borderRadius: [0, 4, 4, 0] },
+          itemStyle: { color: CHART_COLORS.olive, borderRadius: [0, 4, 4, 0] },
           data: top10Products.map((p) => Number(p.sales.toFixed(2))),
           label: {
             show: true,
@@ -373,51 +373,51 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
 
       {/* Three Case-Study Question Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <div className="card-surface p-4 flex flex-col justify-between gap-2">
+        <div className="card-surface p-4 flex flex-col justify-between gap-2.5 border-l-4 border-l-[#533416]">
           <div>
-            <h2 className="text-sm font-semibold text-[#22308F]">Underperforming stores</h2>
-            <p className="text-xs sm:text-sm text-[#1B2233] mt-1 leading-relaxed">
+            <h2 className="text-sm font-semibold text-[#533416]">Underperforming stores</h2>
+            <p className="text-xs sm:text-sm text-[#2B1B0E] mt-1 leading-relaxed">
               {questionCards.underperformingStores}
             </p>
           </div>
           <button
             type="button"
             onClick={() => onNavigate('stores')}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-[#22308F] hover:underline self-start cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#8F5109] hover:text-[#533416] hover:underline self-start cursor-pointer"
           >
             <span>Inspect Stores</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div className="card-surface p-4 flex flex-col justify-between gap-2">
+        <div className="card-surface p-4 flex flex-col justify-between gap-2.5 border-l-4 border-l-[#CE7F20]">
           <div>
-            <h2 className="text-sm font-semibold text-[#22308F]">Discount impact</h2>
-            <p className="text-xs sm:text-sm text-[#1B2233] mt-1 leading-relaxed">
+            <h2 className="text-sm font-semibold text-[#533416]">Discount impact</h2>
+            <p className="text-xs sm:text-sm text-[#2B1B0E] mt-1 leading-relaxed">
               {questionCards.discountImpact}
             </p>
           </div>
           <button
             type="button"
             onClick={() => onNavigate('discounts')}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-[#22308F] hover:underline self-start cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#8F5109] hover:text-[#533416] hover:underline self-start cursor-pointer"
           >
             <span>Inspect Discounts</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div className="card-surface p-4 flex flex-col justify-between gap-2">
+        <div className="card-surface p-4 flex flex-col justify-between gap-2.5 border-l-4 border-l-[#607938]">
           <div>
-            <h2 className="text-sm font-semibold text-[#22308F]">Top salespeople</h2>
-            <p className="text-xs sm:text-sm text-[#1B2233] mt-1 leading-relaxed">
+            <h2 className="text-sm font-semibold text-[#533416]">Top salespeople</h2>
+            <p className="text-xs sm:text-sm text-[#2B1B0E] mt-1 leading-relaxed">
               {questionCards.topSalespeople}
             </p>
           </div>
           <button
             type="button"
             onClick={() => onNavigate('salespeople')}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-[#22308F] hover:underline self-start cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#607938] hover:text-[#445726] hover:underline self-start cursor-pointer"
           >
             <span>Inspect Salespeople</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -439,7 +439,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
             <div
               role="group"
               aria-label="Trend granularity"
-              className="inline-flex items-center p-0.5 rounded-lg bg-[#F5F7FB] border border-[#E3E7EF]"
+              className="inline-flex items-center p-0.5 rounded-lg bg-[#F5EDE0] border border-[#E5D7C1]"
             >
               {(['monthly', 'weekly', 'daily'] as TrendGranularity[]).map((g) => (
                 <button
@@ -448,8 +448,8 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
                   onClick={() => onChangeGranularity(g)}
                   className={`h-7 px-2.5 rounded-md text-xs font-medium capitalize transition-colors cursor-pointer ${
                     granularity === g
-                      ? 'bg-[#22308F] text-white'
-                      : 'text-[#5B6475] hover:text-[#1B2233]'
+                      ? 'bg-[#533416] text-white'
+                      : 'text-[#6B5744] hover:text-[#2B1B0E]'
                   }`}
                 >
                   {g}
@@ -460,28 +460,39 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
         />
 
         {/* Calculated Insights Panel */}
-        <section className="card-surface p-5 flex flex-col justify-between">
+        <section className="card-surface p-5 flex flex-col justify-between bg-gradient-to-b from-white to-[#FAF6EE]/60">
           <div>
-            <h3 className="text-[15px] font-semibold text-[#22308F]">Key Insights</h3>
-            <p className="text-xs text-[#5B6475] mt-0.5">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="text-[15px] font-semibold text-[#533416]">Key Insights</h3>
+              <span className="px-2 py-0.5 rounded bg-[#EEDFC7] text-[#533416] text-[10px] font-semibold uppercase tracking-wide">
+                Live calc
+              </span>
+            </div>
+            <p className="text-xs text-[#6B5744] mt-0.5">
               Calculated directly from matching transactions
             </p>
             <ul className="mt-4 space-y-2.5">
               {insights.map((sentence, idx) => (
                 <li
                   key={idx}
-                  className="text-xs sm:text-sm text-[#1B2233] leading-relaxed pl-3 border-l border-[#E3E7EF]"
+                  className="text-xs sm:text-sm text-[#2B1B0E] leading-relaxed pl-3 border-l-2 border-[#CE7F20]/70"
                 >
                   {sentence}
                 </li>
               ))}
             </ul>
           </div>
-          <p className="text-[11px] text-[#5B6475] mt-4 pt-3 border-t border-[#E3E7EF] tabular-nums flex items-center gap-1 flex-wrap">
+          <p className="text-[11px] text-[#6B5744] mt-4 pt-3 border-t border-[#E5D7C1] tabular-nums flex items-center gap-1 flex-wrap">
             <span>Month-on-month net sales growth:</span>
             <ValueOrNa
               value={formatPercent(analytics.momGrowthPct, { signed: true })}
-              className="font-semibold text-[#1B2233]"
+              className={`font-semibold ${
+                analytics.momGrowthPct === null
+                  ? ''
+                  : analytics.momGrowthPct >= 0
+                    ? 'text-[#607938]'
+                    : 'text-[#B83A28]'
+              }`}
             />
           </p>
         </section>

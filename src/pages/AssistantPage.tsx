@@ -40,7 +40,7 @@ function renderFormattedLine(line: string, key: string): React.ReactNode {
       {parts.map((part, idx) => {
         if (part.startsWith('**') && part.endsWith('**')) {
           return (
-            <strong key={idx} className="font-semibold text-[#1B2233]">
+            <strong key={idx} className="font-semibold text-[#2B1B0E]">
               {part.slice(2, -2)}
             </strong>
           );
@@ -49,7 +49,7 @@ function renderFormattedLine(line: string, key: string): React.ReactNode {
           return (
             <code
               key={idx}
-              className="px-1 py-0.5 rounded bg-[#F5F7FB] border border-[#E3E7EF] font-mono text-[11px] text-[#22308F]"
+              className="px-1 py-0.5 rounded bg-[#EEDFC7]/70 border border-[#DFC9A6] font-mono text-[11px] text-[#533416]"
             >
               {part.slice(1, -1)}
             </code>
@@ -98,10 +98,10 @@ const AssistantMessageBody: React.FC<{ text: string }> = ({ text }) => {
       }
 
       blocks.push(
-        <div key={`tbl-${i}`} className="overflow-x-auto my-2 rounded-lg border border-[#E3E7EF]">
+        <div key={`tbl-${i}`} className="overflow-x-auto my-2 rounded-lg border border-[#E5D7C1]">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-[#F5F7FB] border-b border-[#E3E7EF] text-[#5B6475]">
+              <tr className="bg-[#F5EDE0] border-b border-[#E5D7C1] text-[#6B5744]">
                 {headers.map((h, hi) => (
                   <th key={hi} className="py-1.5 px-2.5 font-semibold whitespace-nowrap">
                     {renderFormattedLine(h, `th-${hi}`)}
@@ -109,11 +109,11 @@ const AssistantMessageBody: React.FC<{ text: string }> = ({ text }) => {
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EEF1F6]">
+            <tbody className="divide-y divide-[#EFE5D6]">
               {rows.map((r, ri) => (
-                <tr key={ri} className="hover:bg-[#FAFBFD]">
+                <tr key={ri} className="bg-white hover:bg-[#FAF6EE]">
                   {headers.map((_, ci) => (
-                    <td key={ci} className="py-1.5 px-2.5 text-[#1B2233] tabular-nums">
+                    <td key={ci} className="py-1.5 px-2.5 text-[#2B1B0E] tabular-nums">
                       {renderFormattedLine(r[ci] ?? '', `td-${ri}-${ci}`)}
                     </td>
                   ))}
@@ -130,7 +130,7 @@ const AssistantMessageBody: React.FC<{ text: string }> = ({ text }) => {
     if (/^#{1,4}\s+/.test(trimmed)) {
       const headingText = trimmed.replace(/^#{1,4}\s+/, '');
       blocks.push(
-        <h4 key={`h-${i}`} className="text-xs sm:text-sm font-semibold text-[#22308F] pt-1">
+        <h4 key={`h-${i}`} className="text-xs sm:text-sm font-semibold text-[#533416] pt-1">
           {renderFormattedLine(headingText, `ht-${i}`)}
         </h4>
       );
@@ -184,7 +184,7 @@ const AssistantMessageBody: React.FC<{ text: string }> = ({ text }) => {
     i++;
   }
 
-  return <div className="space-y-2 text-xs sm:text-sm text-[#1B2233]">{blocks}</div>;
+  return <div className="space-y-2 text-xs sm:text-sm text-[#2B1B0E]">{blocks}</div>;
 };
 
 export const AssistantPage: React.FC<AssistantPageProps> = ({
@@ -301,13 +301,13 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
       {/* Header Banner */}
       <section className="card-surface p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#EEF1FB] text-[#22308F] flex items-center justify-center shrink-0">
-            <Sparkles className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-[#EEDFC7] border border-[#DFC9A6] text-[#533416] flex items-center justify-center shrink-0">
+            <Sparkles className="w-5 h-5 text-[#8F5109]" />
           </div>
           <div>
-            <h2 className="text-base font-semibold text-[#22308F]">AI Assistance</h2>
-            <p className="text-xs sm:text-sm text-[#5B6475] mt-0.5">
-              Ask questions about <span className="font-medium text-[#1B2233]">{model.sheetName}</span>{' '}
+            <h2 className="text-base font-semibold text-[#533416]">AI Assistance</h2>
+            <p className="text-xs sm:text-sm text-[#6B5744] mt-0.5">
+              Ask questions about <span className="font-medium text-[#2B1B0E]">{model.sheetName}</span>{' '}
               ({analytics.matchingCount.toLocaleString()} of {model.totalCount.toLocaleString()}{' '}
               transactions matching · {filterSummary}).
             </p>
@@ -321,7 +321,7 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
               setMessages([]);
               setLastFailedQuestion(null);
             }}
-            className="h-8 px-3 rounded-lg border border-[#E3E7EF] bg-white text-xs font-medium text-[#5B6475] hover:text-[#1B2233] hover:bg-[#F5F7FB] inline-flex items-center gap-1.5 self-start sm:self-center cursor-pointer"
+            className="h-8 px-3 rounded-lg border border-[#E5D7C1] bg-white text-xs font-medium text-[#6B5744] hover:text-[#2B1B0E] hover:bg-[#FAF6EE] inline-flex items-center gap-1.5 self-start sm:self-center cursor-pointer"
           >
             <Trash2 className="w-3.5 h-3.5" />
             <span>Clear chat</span>
@@ -335,10 +335,10 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
           {messages.length === 0 ? (
             <div className="h-full flex flex-col justify-center items-center text-center py-6 space-y-5">
               <div className="max-w-lg space-y-1.5">
-                <p className="text-sm font-semibold text-[#1B2233]">
+                <p className="text-sm font-semibold text-[#533416]">
                   Ask anything about Metro Superstore sales, stores, discounts, or salespeople
                 </p>
-                <p className="text-xs text-[#5B6475]">
+                <p className="text-xs text-[#6B5744]">
                   Responses are grounded directly in your active filters and the {model.totalCount.toLocaleString()} loaded transactions.
                 </p>
               </div>
@@ -350,7 +350,7 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
                     type="button"
                     onClick={() => void sendQuestion(prompt)}
                     disabled={isSending}
-                    className="p-3 rounded-xl border border-[#E3E7EF] bg-[#FAFBFD] hover:bg-[#EEF1FB] hover:border-[#C5D0F0] text-xs font-medium text-[#1B2233] transition-colors text-left cursor-pointer disabled:opacity-50"
+                    className="p-3 rounded-xl border border-[#E5D7C1] bg-[#FAF6EE] hover:bg-[#EEDFC7] hover:border-[#CE7F20] text-xs font-medium text-[#2B1B0E] transition-colors text-left cursor-pointer disabled:opacity-50"
                   >
                     {prompt}
                   </button>
@@ -369,8 +369,8 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
                   <div
                     className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
                       m.error
-                        ? 'bg-[#FEF2F2] text-[#C8372D]'
-                        : 'bg-[#EEF1FB] text-[#22308F]'
+                        ? 'bg-[#FDF1EE] text-[#B83A28]'
+                        : 'bg-[#EEDFC7] text-[#533416] border border-[#DFC9A6]'
                     }`}
                   >
                     {m.error ? (
@@ -384,10 +384,10 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
                 <div
                   className={`max-w-[85%] rounded-xl px-4 py-3 ${
                     m.role === 'user'
-                      ? 'bg-[#22308F] text-white text-xs sm:text-sm'
+                      ? 'bg-[#533416] text-white text-xs sm:text-sm'
                       : m.error
-                        ? 'bg-[#FEF2F2] border border-[#F2C6C3] text-[#C8372D] text-xs sm:text-sm'
-                        : 'bg-[#F5F7FB] border border-[#E3E7EF]'
+                        ? 'bg-[#FDF1EE] border border-[#EBC5BE] text-[#B83A28] text-xs sm:text-sm'
+                        : 'bg-[#FAF6EE] border border-[#E5D7C1]'
                   }`}
                 >
                   {m.role === 'user' ? (
@@ -399,7 +399,7 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
                         <button
                           type="button"
                           onClick={() => void sendQuestion(lastFailedQuestion)}
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#C8372D] hover:underline cursor-pointer"
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#B83A28] hover:underline cursor-pointer"
                         >
                           <RotateCcw className="w-3.5 h-3.5" />
                           <span>Retry</span>
@@ -412,7 +412,7 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
                 </div>
 
                 {m.role === 'user' && (
-                  <div className="w-8 h-8 rounded-lg bg-[#22308F] text-white flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#533416] text-[#EEDFC7] flex items-center justify-center shrink-0 mt-0.5">
                     <User className="w-4 h-4" />
                   </div>
                 )}
@@ -422,10 +422,10 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
 
           {isSending && (
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#EEF1FB] text-[#22308F] flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-[#EEDFC7] border border-[#DFC9A6] text-[#533416] flex items-center justify-center shrink-0">
                 <Bot className="w-4 h-4" />
               </div>
-              <div className="rounded-xl px-4 py-3 bg-[#F5F7FB] border border-[#E3E7EF] text-xs text-[#5B6475] animate-pulse">
+              <div className="rounded-xl px-4 py-3 bg-[#FAF6EE] border border-[#E5D7C1] text-xs text-[#6B5744] animate-pulse">
                 Analyzing dataset and generating response…
               </div>
             </div>
@@ -437,7 +437,7 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
         {/* Input Composer */}
         <form
           onSubmit={handleSubmit}
-          className="p-3 sm:p-4 border-t border-[#E3E7EF] bg-white rounded-b-[14px]"
+          className="p-3 sm:p-4 border-t border-[#E5D7C1] bg-white rounded-b-[14px]"
         >
           <div className="flex items-end gap-2">
             <label htmlFor="ai-assistant-input" className="sr-only">
@@ -451,12 +451,12 @@ export const AssistantPage: React.FC<AssistantPageProps> = ({
               onKeyDown={handleKeyDown}
               placeholder="Ask a question about the dataset (e.g., Compare Ottawa vs Toronto in 2025, or look up MS-001762)…"
               disabled={isSending}
-              className="flex-1 resize-none rounded-lg border border-[#E3E7EF] bg-[#F5F7FB] px-3 py-2 text-xs sm:text-sm text-[#1B2233] placeholder-[#5B6475] focus:bg-white transition-colors"
+              className="flex-1 resize-none rounded-lg border border-[#E5D7C1] bg-[#FAF6EE] px-3 py-2 text-xs sm:text-sm text-[#2B1B0E] placeholder-[#6B5744] focus:bg-white transition-colors"
             />
             <button
               type="submit"
               disabled={isSending || !input.trim()}
-              className="h-10 px-4 rounded-lg bg-[#22308F] text-white text-xs sm:text-sm font-medium hover:bg-[#1a256f] disabled:opacity-50 transition-colors inline-flex items-center gap-1.5 shrink-0 cursor-pointer"
+              className="h-10 px-4 rounded-lg bg-[#533416] text-white text-xs sm:text-sm font-medium hover:bg-[#3F260E] disabled:opacity-50 transition-colors inline-flex items-center gap-1.5 shrink-0 cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Ask</span>

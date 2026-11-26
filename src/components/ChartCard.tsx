@@ -88,10 +88,10 @@ export const ChartCard: React.FC<ChartCardProps> = ({
     >
       <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
         <div className="min-w-0 flex-1">
-          <h3 className="text-[15px] font-semibold text-[#22308F] leading-snug truncate">
+          <h3 className="text-[15px] font-semibold text-[#533416] leading-snug truncate">
             {title}
           </h3>
-          <p className="text-xs text-[#5B6475] mt-0.5 truncate" title={subtitle}>
+          <p className="text-xs text-[#6B5744] mt-0.5 truncate" title={subtitle}>
             {subtitle}
           </p>
         </div>
@@ -111,20 +111,20 @@ export const ChartCard: React.FC<ChartCardProps> = ({
         {loading ? (
           <div
             key="chart-loading"
-            className="absolute inset-0 z-10 w-full h-full rounded-lg bg-[#F5F7FB] animate-pulse flex items-center justify-center"
+            className="absolute inset-0 z-10 w-full h-full rounded-lg bg-[#F5EDE0] animate-pulse flex items-center justify-center"
             aria-busy="true"
           >
-            <span className="text-xs text-[#5B6475]">Loading chart…</span>
+            <span className="text-xs text-[#6B5744]">Loading chart…</span>
           </div>
         ) : null}
 
         {showEmpty ? (
           <div
             key="chart-empty"
-            className="absolute inset-0 z-10 w-full h-full rounded-lg border border-dashed border-[#E3E7EF] bg-[#FAFBFD] flex flex-col items-center justify-center px-4 text-center"
+            className="absolute inset-0 z-10 w-full h-full rounded-lg border border-dashed border-[#E5D7C1] bg-[#FAF6EE] flex flex-col items-center justify-center px-4 text-center"
           >
-            <p className="text-sm font-medium text-[#5B6475]">{emptyMessage}</p>
-            <p className="text-xs text-[#5B6475] mt-1">
+            <p className="text-sm font-medium text-[#533416]">{emptyMessage}</p>
+            <p className="text-xs text-[#6B5744] mt-1">
               Adjust the slicers above to view matching transactions.
             </p>
           </div>

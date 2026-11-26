@@ -42,22 +42,24 @@ export const LayoutShell: React.FC<LayoutShellProps> = ({
   slicerSlot,
   children,
 }) => {
+  const activeNav = NAV_ITEMS.find((n) => n.id === activePage) ?? NAV_ITEMS[0];
+
   return (
-    <div className="min-h-screen bg-[#F5F7FB] text-[#1B2233] flex flex-col md:flex-row">
-      {/* Desktop & Tablet Sidebar (hidden on mobile < md, icon-only on md..lg, full on lg+) */}
+    <div className="min-h-screen bg-[#FAF6EE] text-[#2B1B0E] flex flex-col md:flex-row">
+      {/* Desktop & Tablet Sidebar (Deep Espresso #533416 with Warm Oat #EEDFC7 & Amber #CE7F20 accents) */}
       <aside
         aria-label="Primary navigation"
-        className="hidden md:flex md:w-16 lg:w-60 shrink-0 flex-col bg-white border-r border-[#E3E7EF] sticky top-0 h-screen"
+        className="hidden md:flex md:w-16 lg:w-60 shrink-0 flex-col bg-[#533416] text-[#EEDFC7] border-r border-[#3F260E] sticky top-0 h-screen"
       >
-        <div className="h-16 px-4 flex items-center border-b border-[#E3E7EF]">
-          <div className="w-8 h-8 rounded-lg bg-[#22308F] text-white flex items-center justify-center font-bold text-sm shrink-0">
+        <div className="h-16 px-3.5 lg:px-4 flex items-center border-b border-[#6A4521]">
+          <div className="w-8 h-8 rounded-lg bg-[#CE7F20] text-[#2B1B0E] flex items-center justify-center font-bold text-sm shrink-0 shadow-sm ring-1 ring-[#EEDFC7]/40">
             M
           </div>
           <div className="hidden lg:block ml-3 min-w-0">
-            <h1 className="text-sm font-semibold text-[#22308F] truncate">
+            <h1 className="text-sm font-bold text-white tracking-tight truncate">
               Metro Superstore
             </h1>
-            <p className="text-[11px] text-[#5B6475] truncate">Retail Sales Analytics</p>
+            <p className="text-[11px] text-[#EEDFC7]/80 truncate">Retail Sales Analytics</p>
           </div>
         </div>
 
@@ -72,38 +74,64 @@ export const LayoutShell: React.FC<LayoutShellProps> = ({
                 onClick={() => onSelectPage(item.id)}
                 title={item.label}
                 aria-current={isActive ? 'page' : undefined}
-                className={`w-full flex items-center justify-center lg:justify-start gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer whitespace-nowrap ${
+                className={`relative w-full flex items-center justify-center lg:justify-start gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors cursor-pointer whitespace-nowrap ${
                   isActive
-                    ? 'bg-[#22308F] text-white'
-                    : 'text-[#5B6475] hover:bg-[#F5F7FB] hover:text-[#1B2233]'
+                    ? 'bg-[#EEDFC7] text-[#533416] font-semibold shadow-sm'
+                    : 'text-[#EEDFC7]/85 font-medium hover:bg-[#64401D] hover:text-white'
                 }`}
               >
-                <Icon className="w-4 h-4 shrink-0" />
+                {isActive && (
+                  <span
+                    aria-hidden="true"
+                    className="hidden lg:block absolute left-1 top-2 bottom-2 w-1 rounded-full bg-[#CE7F20]"
+                  />
+                )}
+                <Icon
+                  className={`w-4 h-4 shrink-0 ${
+                    isActive ? 'text-[#8F5109]' : 'text-[#EEDFC7]/80'
+                  }`}
+                />
                 <span className="hidden lg:inline truncate">{item.label}</span>
               </button>
             );
           })}
         </nav>
 
-        <div className="hidden lg:block p-4 border-t border-[#E3E7EF] text-[11px] text-[#5B6475]">
-          All figures in CAD (net of discount)
+        <div className="hidden lg:block p-4 border-t border-[#6A4521] text-[11px] text-[#EEDFC7]/75 space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#607938] shrink-0" aria-hidden="true" />
+            <span className="font-medium text-[#EEDFC7]">Canadian Retail Chain</span>
+          </div>
+          <p className="pl-4">All figures in CAD (net of discount)</p>
         </div>
       </aside>
 
       {/* Main Content Area */}
       <div className="flex-1 min-w-0 flex flex-col pb-20 md:pb-8">
-        <header className="px-4 sm:px-6 pt-4 pb-2 flex items-center justify-between md:hidden">
+        <header className="px-4 sm:px-6 py-3 flex items-center justify-between bg-[#533416] text-[#EEDFC7] md:hidden">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-[#22308F] text-white flex items-center justify-center font-bold text-sm shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-[#CE7F20] text-[#2B1B0E] flex items-center justify-center font-bold text-sm shrink-0">
               M
             </div>
-            <h1 className="text-base font-semibold text-[#22308F] truncate">
-              Metro Superstore Sales
-            </h1>
+            <div className="min-w-0">
+              <h1 className="text-sm font-bold text-white truncate">
+                Metro Superstore
+              </h1>
+              <p className="text-[11px] text-[#EEDFC7]/80 truncate">{activeNav.label}</p>
+            </div>
           </div>
         </header>
 
         <main className="flex-1 px-4 sm:px-6 pt-3 sm:pt-5 space-y-4 max-w-[1440px] w-full mx-auto">
+          <div className="hidden md:flex items-center justify-between border-b border-[#E5D7C1] pb-2.5">
+            <div className="flex items-center gap-2 text-xs text-[#6B5744]">
+              <span className="font-medium text-[#533416]">Metro Superstore</span>
+              <span aria-hidden="true">/</span>
+              <span className="font-semibold text-[#8F5109]">{activeNav.label}</span>
+            </div>
+            <span className="text-xs text-[#6B5744]">Regional Sales Intelligence · CAD</span>
+          </div>
+
           {topSlot}
           {slicerSlot}
           {children}
@@ -113,7 +141,7 @@ export const LayoutShell: React.FC<LayoutShellProps> = ({
       {/* Mobile Bottom Navigation Bar (< md) */}
       <nav
         aria-label="Mobile navigation"
-        className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#E3E7EF] grid grid-cols-7 h-14"
+        className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#E5D7C1] grid grid-cols-7 h-14 shadow-[0_-2px_10px_rgba(83,52,22,0.06)]"
       >
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
@@ -124,11 +152,17 @@ export const LayoutShell: React.FC<LayoutShellProps> = ({
               type="button"
               onClick={() => onSelectPage(item.id)}
               aria-current={isActive ? 'page' : undefined}
-              className={`flex flex-col items-center justify-center gap-0.5 text-[10px] font-medium cursor-pointer ${
-                isActive ? 'text-[#22308F]' : 'text-[#5B6475]'
+              className={`relative flex flex-col items-center justify-center gap-0.5 text-[10px] cursor-pointer ${
+                isActive ? 'text-[#533416] font-semibold bg-[#FAF6EE]' : 'text-[#6B5744] font-medium'
               }`}
             >
-              <Icon className="w-4 h-4" />
+              {isActive && (
+                <span
+                  aria-hidden="true"
+                  className="absolute top-0 inset-x-2 h-0.5 rounded-full bg-[#CE7F20]"
+                />
+              )}
+              <Icon className={`w-4 h-4 ${isActive ? 'text-[#8F5109]' : ''}`} />
               <span className="truncate max-w-full px-0.5">{item.shortLabel}</span>
             </button>
           );

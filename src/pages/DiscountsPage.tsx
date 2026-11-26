@@ -48,7 +48,7 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
           const b = discountBuckets[idx];
           if (!b) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">Discount Bucket: ${b.bucket}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">Discount Bucket: ${b.bucket}</div>
             <div>Net Sales: <b>${formatCADFull(b.sales)}</b></div>
             <div>Units Sold: <b>${formatNumber(b.quantity)}</b></div>
             <div>Orders: <b>${formatNumber(b.orders)}</b></div>
@@ -96,7 +96,7 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
           type: 'bar',
           yAxisIndex: 0,
           barMaxWidth: 36,
-          itemStyle: { color: CHART_COLORS.navy, borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: CHART_COLORS.espresso, borderRadius: [4, 4, 0, 0] },
           data: discountBuckets.map((b) => Number(b.sales.toFixed(2))),
           label: {
             show: true,
@@ -112,8 +112,8 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
           yAxisIndex: 1,
           symbol: 'circle',
           symbolSize: 7,
-          lineStyle: { color: CHART_COLORS.teal, width: 2.5 },
-          itemStyle: { color: CHART_COLORS.teal },
+          lineStyle: { color: CHART_COLORS.olive, width: 2.5 },
+          itemStyle: { color: CHART_COLORS.olive },
           data: discountBuckets.map((b) => b.quantity),
         },
       ],
@@ -131,7 +131,7 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
         formatter: (params: unknown) => {
           const p = params as { name: string; value: number; percent: number };
           return `
-            <div style="font-weight:600;margin-bottom:2px;">${p.name}</div>
+            <div style="font-weight:600;margin-bottom:2px;color:${CHART_COLORS.espresso};">${p.name}</div>
             <div>Net Sales: <b>${formatCADFull(p.value)}</b></div>
             <div>Share: <b>${p.percent.toFixed(1)}%</b></div>
           `;
@@ -159,7 +159,7 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
             {
               name: 'Full-Price Sales',
               value: Number(discountedVsFullPrice.fullPriceSales.toFixed(2)),
-              itemStyle: { color: CHART_COLORS.navy },
+              itemStyle: { color: CHART_COLORS.espresso },
             },
           ],
         },
@@ -180,7 +180,7 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
           const c = discountByCategory[idx];
           if (!c) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${c.category}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${c.category}</div>
             <div>Discount Amount: <b>${formatCADFull(c.discountAmount)}</b></div>
             <div>Discount Rate: <b>${formatPercent(c.discountRate)}</b></div>
           `;
@@ -234,7 +234,7 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
           const s = discountByStore[idx];
           if (!s) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${s.store}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${s.store}</div>
             <div>Discount Amount: <b>${formatCADFull(s.discountAmount)}</b></div>
             <div>Discount Rate: <b>${formatPercent(s.discountRate)}</b></div>
           `;
@@ -261,7 +261,7 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
           name: 'Discount Amount (CAD)',
           type: 'bar',
           barMaxWidth: 24,
-          itemStyle: { color: CHART_COLORS.slate, borderRadius: [0, 4, 4, 0] },
+          itemStyle: { color: CHART_COLORS.olive, borderRadius: [0, 4, 4, 0] },
           data: discountByStore.map((s) => Number(s.discountAmount.toFixed(2))),
           label: {
             show: true,
@@ -295,38 +295,38 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
     <div className="space-y-4">
       {/* Answer in Numbers Summary */}
       <section className="card-surface p-5 space-y-3">
-        <h2 className="text-base font-semibold text-[#22308F]">
+        <h2 className="text-base font-semibold text-[#533416]">
           Discount Impact Summary
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm text-[#1B2233]">
-          <div className="p-3.5 rounded-xl bg-[#F5F7FB] border border-[#E3E7EF]">
-            <p className="text-xs font-medium text-[#5B6475]">Revenue Given Away</p>
-            <p className="text-xl font-semibold text-[#1B2233] tabular-nums mt-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm text-[#2B1B0E]">
+          <div className="p-3.5 rounded-xl bg-[#FAF6EE] border border-[#E5D7C1]">
+            <p className="text-xs font-medium text-[#6B5744]">Revenue Given Away</p>
+            <p className="text-xl font-bold text-[#533416] tabular-nums mt-1">
               <ValueOrNa value={formatCAD(kpis.totalDiscounts.value)} />
             </p>
-            <p className="text-xs text-[#5B6475] mt-1 tabular-nums flex items-center gap-1 flex-wrap">
+            <p className="text-xs text-[#6B5744] mt-1 tabular-nums flex items-center gap-1 flex-wrap">
               <span>Effective discount rate:</span>
-              <ValueOrNa value={formatPercent(kpis.discountRate.value)} />
+              <ValueOrNa value={formatPercent(kpis.discountRate.value)} className="font-semibold text-[#8F5109]" />
               <span>of gross sales</span>
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#F5F7FB] border border-[#E3E7EF]">
-            <p className="text-xs font-medium text-[#5B6475]">Highest Discount Volume</p>
-            <p className="text-sm font-semibold text-[#1B2233] mt-1 flex items-center gap-1 flex-wrap">
+          <div className="p-3.5 rounded-xl bg-[#FAF6EE] border border-[#E5D7C1]">
+            <p className="text-xs font-medium text-[#6B5744]">Highest Discount Volume</p>
+            <p className="text-sm font-semibold text-[#2B1B0E] mt-1 flex items-center gap-1 flex-wrap">
               <span>Category:</span>
               {topCat ? `${topCat.category} (${formatCAD(topCat.discountAmount)})` : <NaValue />}
             </p>
-            <p className="text-xs text-[#5B6475] mt-1 flex items-center gap-1 flex-wrap">
+            <p className="text-xs text-[#6B5744] mt-1 flex items-center gap-1 flex-wrap">
               <span>Store:</span>
               {topStore ? `${topStore.store} (${formatCAD(topStore.discountAmount)})` : <NaValue />}
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#F5F7FB] border border-[#E3E7EF]">
-            <p className="text-xs font-medium text-[#5B6475]">Units per Order vs. Discount Depth</p>
-            <p className="text-xs text-[#1B2233] mt-1 leading-relaxed">{unitsRelationText}</p>
-            <p className="text-[11px] font-medium text-[#5B6475] mt-1.5">
+          <div className="p-3.5 rounded-xl bg-[#EEDFC7]/55 border border-[#DFC9A6]">
+            <p className="text-xs font-medium text-[#533416]">Units per Order vs. Discount Depth</p>
+            <p className="text-xs text-[#2B1B0E] mt-1 leading-relaxed">{unitsRelationText}</p>
+            <p className="text-[11px] font-medium text-[#6B5744] mt-1.5">
               This observed relationship in the data does not prove cause.
             </p>
           </div>
@@ -382,18 +382,18 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
 
       {/* Discount Bucket Detail Table */}
       <section className="card-surface overflow-hidden">
-        <div className="px-5 py-4 border-b border-[#E3E7EF]">
-          <h3 className="text-[15px] font-semibold text-[#22308F]">
+        <div className="px-5 py-4 border-b border-[#E5D7C1]">
+          <h3 className="text-[15px] font-semibold text-[#533416]">
             Discount Bucket Breakdown
           </h3>
-          <p className="text-xs text-[#5B6475]">
+          <p className="text-xs text-[#6B5744]">
             Comparison of order volume and average units per order across discount tiers (correlation does not establish causation)
           </p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr className="bg-[#F5F7FB] border-b border-[#E3E7EF] text-xs font-semibold text-[#5B6475]">
+              <tr className="bg-[#F5EDE0] border-b border-[#E5D7C1] text-xs font-semibold text-[#6B5744]">
                 <th className="py-2.5 px-4">Discount Bucket</th>
                 <th className="py-2.5 px-3 text-right">Net Sales (CAD)</th>
                 <th className="py-2.5 px-3 text-right">Discount Given (CAD)</th>
@@ -403,14 +403,14 @@ export const DiscountsPage: React.FC<DiscountsPageProps> = ({
                 <th className="py-2.5 px-4 text-right">AOV</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EEF1F6]">
+            <tbody className="divide-y divide-[#EFE5D6]">
               {discountBuckets.map((b) => (
-                <tr key={b.bucket} className="hover:bg-[#F5F7FB]">
-                  <td className="py-2.5 px-4 font-medium text-[#1B2233]">{b.bucket}</td>
+                <tr key={b.bucket} className="hover:bg-[#FAF6EE]">
+                  <td className="py-2.5 px-4 font-semibold text-[#533416]">{b.bucket}</td>
                   <td className="py-2.5 px-3 text-right tabular-nums">
                     <ValueOrNa value={formatCAD(b.sales)} />
                   </td>
-                  <td className="py-2.5 px-3 text-right tabular-nums text-[#5B6475]">
+                  <td className="py-2.5 px-3 text-right tabular-nums text-[#8F5109] font-medium">
                     <ValueOrNa value={formatCAD(b.discountAmount)} />
                   </td>
                   <td className="py-2.5 px-3 text-right tabular-nums">{formatNumber(b.orders)}</td>

@@ -52,54 +52,54 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
         aria-expanded={open}
         className={`h-8 px-2.5 rounded-lg border text-xs font-medium inline-flex items-center gap-1.5 whitespace-nowrap transition-colors cursor-pointer ${
           selected.length > 0
-            ? 'border-[#22308F] bg-[#EEF1FB] text-[#22308F]'
-            : 'border-[#E3E7EF] bg-white text-[#1B2233] hover:bg-[#F5F7FB]'
+            ? 'border-[#CE7F20] bg-[#EEDFC7] text-[#533416]'
+            : 'border-[#E5D7C1] bg-white text-[#2B1B0E] hover:bg-[#FAF6EE]'
         }`}
       >
         <span>{label}</span>
         {selected.length > 0 && (
           <span className="tabular-nums font-semibold">({selected.length})</span>
         )}
-        <ChevronDown className="w-3.5 h-3.5 opacity-70" />
+        <ChevronDown className="w-3.5 h-3.5 opacity-75" />
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full mt-1.5 w-64 rounded-[12px] border border-[#E3E7EF] bg-white shadow-lg z-40 p-2">
+        <div className="absolute left-0 top-full mt-1.5 w-64 rounded-[12px] border border-[#E5D7C1] bg-white shadow-lg z-40 p-2">
           {searchable && (
             <div className="relative mb-2">
-              <Search className="w-3.5 h-3.5 text-[#5B6475] absolute left-2.5 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-[#6B5744] absolute left-2.5 top-2.5" />
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={`Search ${label.toLowerCase()}…`}
-                className="w-full h-8 pl-8 pr-2.5 text-xs border border-[#E3E7EF] rounded-lg bg-[#F5F7FB] text-[#1B2233] placeholder-[#5B6475] focus:bg-white"
+                className="w-full h-8 pl-8 pr-2.5 text-xs border border-[#E5D7C1] rounded-lg bg-[#FAF6EE] text-[#2B1B0E] placeholder-[#6B5744] focus:bg-white"
               />
             </div>
           )}
           <div className="max-h-56 overflow-y-auto space-y-0.5">
             {filtered.length === 0 ? (
-              <p className="text-xs text-[#5B6475] py-3 text-center">No matching options</p>
+              <p className="text-xs text-[#6B5744] py-3 text-center">No matching options</p>
             ) : (
               filtered.map((opt) => {
                 const checked = selected.includes(opt.value);
                 return (
                   <label
                     key={opt.value}
-                    className="flex items-center justify-between gap-2 px-2 py-1.5 rounded-md hover:bg-[#F5F7FB] cursor-pointer text-xs"
+                    className="flex items-center justify-between gap-2 px-2 py-1.5 rounded-md hover:bg-[#FAF6EE] cursor-pointer text-xs"
                   >
                     <span className="flex items-center gap-2 min-w-0">
                       <input
                         type="checkbox"
                         checked={checked}
                         onChange={() => toggle(opt.value)}
-                        className="rounded border-[#E3E7EF] text-[#22308F] focus:ring-[#22308F]"
+                        className="rounded border-[#E5D7C1] accent-[#533416]"
                       />
-                      <span className="truncate text-[#1B2233]" title={opt.value}>
+                      <span className="truncate text-[#2B1B0E]" title={opt.value}>
                         {opt.value}
                       </span>
                     </span>
-                    <span className="text-[11px] text-[#5B6475] tabular-nums shrink-0">
+                    <span className="text-[11px] text-[#6B5744] tabular-nums shrink-0">
                       {opt.count.toLocaleString()}
                     </span>
                   </label>
@@ -108,11 +108,11 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
             )}
           </div>
           {selected.length > 0 && (
-            <div className="pt-2 mt-1.5 border-t border-[#E3E7EF] flex justify-end">
+            <div className="pt-2 mt-1.5 border-t border-[#E5D7C1] flex justify-end">
               <button
                 type="button"
                 onClick={() => onChange([])}
-                className="text-[11px] font-medium text-[#22308F] hover:underline cursor-pointer"
+                className="text-[11px] font-semibold text-[#8F5109] hover:underline cursor-pointer"
               >
                 Clear {label.toLowerCase()}
               </button>
@@ -253,16 +253,16 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
 
   return (
     <>
-      <div className="sticky top-0 z-30 bg-[#F5F7FB]/95 backdrop-blur-sm pt-1 pb-2">
+      <div className="sticky top-0 z-30 bg-[#FAF6EE]/95 backdrop-blur-sm pt-1 pb-2">
         <div className="card-surface px-3.5 py-2.5">
           {/* Compact mobile header toggle (< md) to stay well within 15% mobile viewport cap */}
           <div className="flex md:hidden items-center justify-between gap-2">
             <button
               type="button"
               onClick={() => setMobileExpanded((v) => !v)}
-              className="h-8 px-2.5 rounded-lg border border-[#E3E7EF] bg-white text-xs font-medium text-[#1B2233] inline-flex items-center gap-1.5 cursor-pointer"
+              className="h-8 px-2.5 rounded-lg border border-[#E5D7C1] bg-white text-xs font-medium text-[#2B1B0E] inline-flex items-center gap-1.5 cursor-pointer"
             >
-              <Filter className="w-3.5 h-3.5 text-[#22308F]" />
+              <Filter className="w-3.5 h-3.5 text-[#533416]" />
               <span>Filters{chips.length > 0 ? ` (${chips.length})` : ''}</span>
               <ChevronDown
                 className={`w-3.5 h-3.5 transition-transform ${
@@ -270,7 +270,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                 }`}
               />
             </button>
-            <span className="text-xs font-medium text-[#5B6475] tabular-nums">
+            <span className="text-xs font-medium text-[#6B5744] tabular-nums">
               {matchingCount.toLocaleString()} transactions match
             </span>
           </div>
@@ -281,7 +281,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
               <div className="flex flex-wrap items-center gap-2">
                 {/* Date Quick Picks */}
                 <div
-                  className="inline-flex flex-wrap items-center p-0.5 rounded-lg bg-[#F5F7FB] border border-[#E3E7EF]"
+                  className="inline-flex flex-wrap items-center p-0.5 rounded-lg bg-[#F5EDE0] border border-[#E5D7C1]"
                   role="group"
                   aria-label="Date range quick picks"
                 >
@@ -301,8 +301,8 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                         }
                         className={`h-7 px-2.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap cursor-pointer ${
                           active
-                            ? 'bg-[#22308F] text-white'
-                            : 'text-[#5B6475] hover:text-[#1B2233]'
+                            ? 'bg-[#533416] text-white shadow-xs'
+                            : 'text-[#6B5744] hover:text-[#2B1B0E]'
                         }`}
                       >
                         {preset.label}
@@ -329,10 +329,10 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                         dateFrom: e.target.value,
                       })
                     }
-                    className="h-8 px-2 text-xs border border-[#E3E7EF] rounded-lg bg-white text-[#1B2233]"
+                    className="h-8 px-2 text-xs border border-[#E5D7C1] rounded-lg bg-white text-[#2B1B0E]"
                     title="Filter from date"
                   />
-                  <span className="text-xs text-[#5B6475]">to</span>
+                  <span className="text-xs text-[#6B5744]">to</span>
                   <label htmlFor="slicer-date-to" className="sr-only">
                     To date
                   </label>
@@ -349,7 +349,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                         dateTo: e.target.value,
                       })
                     }
-                    className="h-8 px-2 text-xs border border-[#E3E7EF] rounded-lg bg-white text-[#1B2233]"
+                    className="h-8 px-2 text-xs border border-[#E5D7C1] rounded-lg bg-white text-[#2B1B0E]"
                     title="Filter to date"
                   />
                 </div>
@@ -388,8 +388,8 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                   onClick={() => setMoreOpen(true)}
                   className={`h-8 px-2.5 rounded-lg border text-xs font-medium inline-flex items-center gap-1.5 whitespace-nowrap transition-colors cursor-pointer ${
                     moreCount > 0
-                      ? 'border-[#22308F] bg-[#EEF1FB] text-[#22308F]'
-                      : 'border-[#E3E7EF] bg-white text-[#1B2233] hover:bg-[#F5F7FB]'
+                      ? 'border-[#CE7F20] bg-[#EEDFC7] text-[#533416]'
+                      : 'border-[#E5D7C1] bg-white text-[#2B1B0E] hover:bg-[#FAF6EE]'
                   }`}
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -398,7 +398,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
               </div>
 
               <div className="hidden md:flex items-center gap-3 shrink-0">
-                <span className="text-xs font-medium text-[#5B6475] tabular-nums whitespace-nowrap">
+                <span className="text-xs font-medium text-[#6B5744] tabular-nums whitespace-nowrap">
                   {matchingCount.toLocaleString()} transactions match
                 </span>
               </div>
@@ -406,13 +406,13 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
 
             {/* Active Filter Chips */}
             {chips.length > 0 && (
-              <div className="flex flex-wrap items-center gap-1.5 mt-2.5 pt-2 border-t border-[#E3E7EF]">
+              <div className="flex flex-wrap items-center gap-1.5 mt-2.5 pt-2 border-t border-[#E5D7C1]">
                 {chips.map((chip) => (
                   <button
                     key={chip.key}
                     type="button"
                     onClick={chip.onRemove}
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#EEF1FB] text-[#22308F] text-xs font-medium hover:bg-[#dfe5f8] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#EEDFC7] text-[#533416] text-xs font-medium hover:bg-[#E4CFAF] transition-colors cursor-pointer"
                   >
                     <span>{chip.label}</span>
                     <X className="w-3 h-3" />
@@ -421,7 +421,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                 <button
                   type="button"
                   onClick={onClearAll}
-                  className="text-xs font-medium text-[#C8372D] hover:underline ml-1 px-1.5 py-0.5 cursor-pointer"
+                  className="text-xs font-medium text-[#B83A28] hover:underline ml-1 px-1.5 py-0.5 cursor-pointer"
                 >
                   Clear all
                 </button>
@@ -434,19 +434,19 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
       {/* More Filters Drawer */}
       {moreOpen && (
         <div
-          className="fixed inset-0 z-50 flex justify-end bg-black/25"
+          className="fixed inset-0 z-50 flex justify-end bg-[#2B1B0E]/30"
           role="dialog"
           aria-modal="true"
           aria-label="Additional dimension filters"
         >
-          <div className="w-full max-w-sm bg-white h-full border-l border-[#E3E7EF] shadow-xl flex flex-col">
-            <div className="px-5 py-4 border-b border-[#E3E7EF] flex items-center justify-between">
-              <h2 className="text-base font-semibold text-[#22308F]">More Filters</h2>
+          <div className="w-full max-w-sm bg-white h-full border-l border-[#E5D7C1] shadow-xl flex flex-col">
+            <div className="px-5 py-4 border-b border-[#E5D7C1] flex items-center justify-between">
+              <h2 className="text-base font-semibold text-[#533416]">More Filters</h2>
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}
                 aria-label="Close more filters"
-                className="p-1.5 rounded-lg text-[#5B6475] hover:bg-[#F5F7FB] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#6B5744] hover:bg-[#FAF6EE] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -456,12 +456,12 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
               {/* Province */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xs font-semibold text-[#1B2233]">Province</h3>
+                  <h3 className="text-xs font-semibold text-[#2B1B0E]">Province</h3>
                   {filters.provinces.length > 0 && (
                     <button
                       type="button"
                       onClick={() => onChangeFilters({ ...filters, provinces: [] })}
-                      className="text-xs text-[#22308F] hover:underline cursor-pointer"
+                      className="text-xs font-medium text-[#8F5109] hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -473,7 +473,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                     return (
                       <label
                         key={opt.value}
-                        className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-[#F5F7FB] cursor-pointer text-xs"
+                        className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-[#FAF6EE] cursor-pointer text-xs"
                       >
                         <span className="flex items-center gap-2">
                           <input
@@ -487,11 +487,11 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                                   : [...filters.provinces, opt.value],
                               })
                             }
-                            className="rounded border-[#E3E7EF] text-[#22308F]"
+                            className="rounded border-[#E5D7C1] accent-[#533416]"
                           />
-                          <span className="text-[#1B2233]">{opt.value}</span>
+                          <span className="text-[#2B1B0E]">{opt.value}</span>
                         </span>
-                        <span className="text-[#5B6475] tabular-nums">
+                        <span className="text-[#6B5744] tabular-nums">
                           {opt.count.toLocaleString()}
                         </span>
                       </label>
@@ -503,12 +503,12 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
               {/* Sales Channel */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xs font-semibold text-[#1B2233]">Sales Channel</h3>
+                  <h3 className="text-xs font-semibold text-[#2B1B0E]">Sales Channel</h3>
                   {filters.channels.length > 0 && (
                     <button
                       type="button"
                       onClick={() => onChangeFilters({ ...filters, channels: [] })}
-                      className="text-xs text-[#22308F] hover:underline cursor-pointer"
+                      className="text-xs font-medium text-[#8F5109] hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -520,7 +520,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                     return (
                       <label
                         key={opt.value}
-                        className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-[#F5F7FB] cursor-pointer text-xs"
+                        className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-[#FAF6EE] cursor-pointer text-xs"
                       >
                         <span className="flex items-center gap-2">
                           <input
@@ -534,11 +534,11 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                                   : [...filters.channels, opt.value],
                               })
                             }
-                            className="rounded border-[#E3E7EF] text-[#22308F]"
+                            className="rounded border-[#E5D7C1] accent-[#533416]"
                           />
-                          <span className="text-[#1B2233]">{opt.value}</span>
+                          <span className="text-[#2B1B0E]">{opt.value}</span>
                         </span>
-                        <span className="text-[#5B6475] tabular-nums">
+                        <span className="text-[#6B5744] tabular-nums">
                           {opt.count.toLocaleString()}
                         </span>
                       </label>
@@ -550,12 +550,12 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
               {/* Payment Method */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xs font-semibold text-[#1B2233]">Payment Method</h3>
+                  <h3 className="text-xs font-semibold text-[#2B1B0E]">Payment Method</h3>
                   {filters.paymentMethods.length > 0 && (
                     <button
                       type="button"
                       onClick={() => onChangeFilters({ ...filters, paymentMethods: [] })}
-                      className="text-xs text-[#22308F] hover:underline cursor-pointer"
+                      className="text-xs font-medium text-[#8F5109] hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -567,7 +567,7 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                     return (
                       <label
                         key={opt.value}
-                        className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-[#F5F7FB] cursor-pointer text-xs"
+                        className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-[#FAF6EE] cursor-pointer text-xs"
                       >
                         <span className="flex items-center gap-2">
                           <input
@@ -581,11 +581,11 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
                                   : [...filters.paymentMethods, opt.value],
                               })
                             }
-                            className="rounded border-[#E3E7EF] text-[#22308F]"
+                            className="rounded border-[#E5D7C1] accent-[#533416]"
                           />
-                          <span className="text-[#1B2233]">{opt.value}</span>
+                          <span className="text-[#2B1B0E]">{opt.value}</span>
                         </span>
-                        <span className="text-[#5B6475] tabular-nums">
+                        <span className="text-[#6B5744] tabular-nums">
                           {opt.count.toLocaleString()}
                         </span>
                       </label>
@@ -595,21 +595,21 @@ export const SlicerBar: React.FC<SlicerBarProps> = ({
               </div>
             </div>
 
-            <div className="px-5 py-3 border-t border-[#E3E7EF] flex items-center justify-between gap-3">
+            <div className="px-5 py-3 border-t border-[#E5D7C1] flex items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => {
                   onClearAll();
                   setMoreOpen(false);
                 }}
-                className="text-xs font-medium text-[#C8372D] hover:underline cursor-pointer"
+                className="text-xs font-medium text-[#B83A28] hover:underline cursor-pointer"
               >
                 Clear all filters
               </button>
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}
-                className="h-9 px-4 rounded-lg bg-[#22308F] text-white text-xs font-medium hover:bg-[#1a256f] cursor-pointer"
+                className="h-9 px-4 rounded-lg bg-[#533416] text-white text-xs font-medium hover:bg-[#3F260E] cursor-pointer"
               >
                 Done ({matchingCount.toLocaleString()} match)
               </button>

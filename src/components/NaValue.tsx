@@ -12,7 +12,7 @@ export const NaValue: React.FC<NaValueProps> = ({
 }) => {
   return (
     <span
-      className={`inline-flex items-center gap-1 text-[#5B6475] font-medium tabular-nums ${className}`}
+      className={`inline-flex items-center gap-1 text-[#6B5744] font-medium tabular-nums ${className}`}
       title={title}
     >
       <CircleMinus className="w-3.5 h-3.5 shrink-0 opacity-80" aria-hidden="true" />

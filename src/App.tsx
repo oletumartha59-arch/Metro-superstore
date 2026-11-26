@@ -357,9 +357,9 @@ export default function App() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="card-surface p-4 h-32 animate-pulse bg-white">
-              <div className="h-3 w-24 bg-[#EEF1F6] rounded" />
-              <div className="h-7 w-32 bg-[#EEF1F6] rounded mt-4" />
-              <div className="h-3 w-20 bg-[#EEF1F6] rounded mt-4" />
+              <div className="h-3 w-24 bg-[#EFE5D6] rounded" />
+              <div className="h-7 w-32 bg-[#EFE5D6] rounded mt-4" />
+              <div className="h-3 w-20 bg-[#EFE5D6] rounded mt-4" />
             </div>
           ))}
         </div>

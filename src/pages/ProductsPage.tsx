@@ -34,7 +34,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           const c = categories[idx];
           if (!c) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${c.category}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${c.category}</div>
             <div>Net Sales: <b>${formatCADFull(c.sales)}</b></div>
             <div>Share: <b>${formatPercent(c.sharePct)}</b></div>
             <div>Units Sold: <b>${formatNumber(c.quantity)}</b></div>
@@ -99,7 +99,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           };
           const d = p.data;
           return `
-            <div style="font-weight:600;margin-bottom:4px;">${d.productName}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${d.productName}</div>
             <div>Category: <b>${d.category}</b></div>
             <div>Avg Unit Price: <b>${formatCADFull(d.value[0])}</b></div>
             <div>Units Sold: <b>${formatNumber(d.value[1])}</b></div>
@@ -180,16 +180,16 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       {/* Top 10 & Bottom 10 Product Tables */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <section className="card-surface overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#E3E7EF]">
-            <h3 className="text-[15px] font-semibold text-[#22308F]">Top 10 Products</h3>
-            <p className="text-xs text-[#5B6475]">
+          <div className="px-5 py-4 border-b border-[#E5D7C1]">
+            <h3 className="text-[15px] font-semibold text-[#533416]">Top 10 Products</h3>
+            <p className="text-xs text-[#6B5744]">
               Highest Net Sales (CAD). Click a row to filter everywhere.
             </p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="bg-[#F5F7FB] border-b border-[#E3E7EF] text-xs font-semibold text-[#5B6475]">
+                <tr className="bg-[#F5EDE0] border-b border-[#E5D7C1] text-xs font-semibold text-[#6B5744]">
                   <th className="py-2.5 px-4">Product</th>
                   <th className="py-2.5 px-3">Category</th>
                   <th className="py-2.5 px-3 text-right">Sales (CAD)</th>
@@ -197,10 +197,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   <th className="py-2.5 px-4 text-right">Disc. Rate</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#EEF1F6]">
+              <tbody className="divide-y divide-[#EFE5D6]">
                 {top10Products.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-sm text-[#5B6475]">
+                    <td colSpan={5} className="py-8 text-center text-sm text-[#6B5744]">
                       No transactions match these filters
                     </td>
                   </tr>
@@ -209,12 +209,12 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     <tr
                       key={p.product}
                       onClick={() => onToggleFilter('products', p.product)}
-                      className="cursor-pointer hover:bg-[#F5F7FB]"
+                      className="cursor-pointer hover:bg-[#FAF6EE]"
                     >
-                      <td className="py-2.5 px-4 font-medium text-[#1B2233] max-w-[200px] truncate">
+                      <td className="py-2.5 px-4 font-medium text-[#2B1B0E] max-w-[200px] truncate">
                         {p.product}
                       </td>
-                      <td className="py-2.5 px-3 text-[#5B6475] whitespace-nowrap">
+                      <td className="py-2.5 px-3 text-[#6B5744] whitespace-nowrap">
                         {p.category}
                       </td>
                       <td className="py-2.5 px-3 text-right tabular-nums font-medium">
@@ -235,16 +235,16 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         </section>
 
         <section className="card-surface overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#E3E7EF]">
-            <h3 className="text-[15px] font-semibold text-[#22308F]">Bottom 10 Products</h3>
-            <p className="text-xs text-[#5B6475]">
+          <div className="px-5 py-4 border-b border-[#E5D7C1]">
+            <h3 className="text-[15px] font-semibold text-[#533416]">Bottom 10 Products</h3>
+            <p className="text-xs text-[#6B5744]">
               Lowest Net Sales (CAD) among active products. Click a row to filter.
             </p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="bg-[#F5F7FB] border-b border-[#E3E7EF] text-xs font-semibold text-[#5B6475]">
+                <tr className="bg-[#F5EDE0] border-b border-[#E5D7C1] text-xs font-semibold text-[#6B5744]">
                   <th className="py-2.5 px-4">Product</th>
                   <th className="py-2.5 px-3">Category</th>
                   <th className="py-2.5 px-3 text-right">Sales (CAD)</th>
@@ -252,10 +252,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   <th className="py-2.5 px-4 text-right">Disc. Rate</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#EEF1F6]">
+              <tbody className="divide-y divide-[#EFE5D6]">
                 {bottom10Products.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-sm text-[#5B6475]">
+                    <td colSpan={5} className="py-8 text-center text-sm text-[#6B5744]">
                       No transactions match these filters
                     </td>
                   </tr>
@@ -264,12 +264,12 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     <tr
                       key={p.product}
                       onClick={() => onToggleFilter('products', p.product)}
-                      className="cursor-pointer hover:bg-[#F5F7FB]"
+                      className="cursor-pointer hover:bg-[#FAF6EE]"
                     >
-                      <td className="py-2.5 px-4 font-medium text-[#1B2233] max-w-[200px] truncate">
+                      <td className="py-2.5 px-4 font-medium text-[#2B1B0E] max-w-[200px] truncate">
                         {p.product}
                       </td>
-                      <td className="py-2.5 px-3 text-[#5B6475] whitespace-nowrap">
+                      <td className="py-2.5 px-3 text-[#6B5744] whitespace-nowrap">
                         {p.category}
                       </td>
                       <td className="py-2.5 px-3 text-right tabular-nums font-medium">

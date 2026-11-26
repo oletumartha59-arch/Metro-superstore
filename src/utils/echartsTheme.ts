@@ -1,23 +1,24 @@
 import * as echarts from 'echarts';
 
 export const CHART_PALETTE = [
-  '#22308F', // Navy
-  '#0F9D8A', // Teal
-  '#E0A100', // Amber
-  '#6B778C', // Slate
-  '#8FA3E8', // Light blue
+  '#533416', // Deep Espresso
+  '#CE7F20', // Warm Amber
+  '#607938', // Olive Sage
+  '#9C7A54', // Roasted Chestnut
+  '#C7A97F', // Toasted Oat
 ] as const;
 
 export const CHART_COLORS = {
-  navy: '#22308F',
-  teal: '#0F9D8A',
-  amber: '#E0A100',
-  slate: '#6B778C',
-  lightBlue: '#8FA3E8',
-  red: '#C8372D',
-  ink: '#1B2233',
-  muted: '#5B6475',
-  border: '#E3E7EF',
+  espresso: '#533416',
+  amber: '#CE7F20',
+  amberText: '#8F5109',
+  olive: '#607938',
+  oat: '#EEDFC7',
+  taupe: '#9C7A54',
+  red: '#B83A28',
+  ink: '#2B1B0E',
+  muted: '#6B5744',
+  border: '#E5D7C1',
 } as const;
 
 let themeRegistered = false;
@@ -28,12 +29,12 @@ export function ensureMetroChartTheme(): void {
     color: [...CHART_PALETTE],
     backgroundColor: 'transparent',
     textStyle: {
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      fontFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       color: CHART_COLORS.ink,
     },
     title: {
       textStyle: {
-        color: CHART_COLORS.ink,
+        color: CHART_COLORS.espresso,
         fontWeight: 600,
       },
       subtextStyle: {
@@ -50,18 +51,18 @@ export function ensureMetroChartTheme(): void {
     },
     tooltip: {
       backgroundColor: '#FFFFFF',
-      borderColor: '#E3E7EF',
+      borderColor: '#E5D7C1',
       borderWidth: 1,
       textStyle: {
         color: CHART_COLORS.ink,
         fontSize: 12,
       },
-      extraCssText: 'box-shadow: 0 4px 14px rgba(27, 34, 51, 0.08); border-radius: 8px;',
+      extraCssText: 'box-shadow: 0 6px 18px rgba(83, 52, 22, 0.12); border-radius: 10px;',
     },
     categoryAxis: {
       axisLine: {
         show: true,
-        lineStyle: { color: '#E3E7EF' },
+        lineStyle: { color: '#E5D7C1' },
       },
       axisTick: { show: false },
       axisLabel: {
@@ -80,7 +81,7 @@ export function ensureMetroChartTheme(): void {
       splitLine: {
         show: true,
         lineStyle: {
-          color: '#EEF1F6',
+          color: '#EFE5D6',
           type: 'solid',
         },
       },

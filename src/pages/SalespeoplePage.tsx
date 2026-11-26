@@ -44,7 +44,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
           const sp = top10[idx];
           if (!sp) return '';
           return `
-            <div style="font-weight:600;margin-bottom:4px;">#${sp.rank} ${sp.salesperson}</div>
+            <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">#${sp.rank} ${sp.salesperson}</div>
             <div>Net Sales: <b>${formatCADFull(sp.sales)}</b></div>
             <div>Orders: <b>${formatNumber(sp.orders)}</b></div>
             <div>AOV: <b>${formatCADFull(sp.aov)}</b></div>
@@ -77,7 +77,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
           name: 'Net Sales (CAD)',
           type: 'bar',
           barMaxWidth: 22,
-          itemStyle: { color: CHART_COLORS.navy, borderRadius: [0, 4, 4, 0] },
+          itemStyle: { color: CHART_COLORS.espresso, borderRadius: [0, 4, 4, 0] },
           data: top10.map((s) => Number(s.sales.toFixed(2))),
           label: {
             show: true,
@@ -110,7 +110,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
           const pt = selectedTrend[idx];
           if (!pt) return '';
           return `
-            <div style="font-weight:600;margin-bottom:2px;">${selectedPerson} · ${pt.label}</div>
+            <div style="font-weight:600;margin-bottom:2px;color:${CHART_COLORS.espresso};">${selectedPerson} · ${pt.label}</div>
             <div>Net Sales: <b>${formatCADFull(pt.sales)}</b></div>
             <div>Quantity: <b>${formatNumber(pt.quantity)}</b> units</div>
             <div>Orders: <b>${formatNumber(pt.orders)}</b></div>
@@ -135,7 +135,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
           name: 'Monthly Net Sales',
           type: 'bar',
           barMaxWidth: 28,
-          itemStyle: { color: CHART_COLORS.teal, borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: CHART_COLORS.amber, borderRadius: [4, 4, 0, 0] },
           data: selectedTrend.map((t) => Number(t.sales.toFixed(2))),
           label: {
             show: selectedTrend.length <= 14,
@@ -156,7 +156,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
         trigger: 'axis',
         axisPointer: { type: 'shadow' },
         formatter: () => `
-          <div style="font-weight:600;margin-bottom:4px;">${selectedStat.salesperson} Channel Mix</div>
+          <div style="font-weight:600;margin-bottom:4px;color:${CHART_COLORS.espresso};">${selectedStat.salesperson} Channel Mix</div>
           <div>In-Store: <b>${formatCADFull(selectedStat.inStoreSales)}</b> (${formatPercent(
             selectedStat.inStoreSales / selectedStat.sales
           )})</div>
@@ -193,7 +193,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
           type: 'bar',
           stack: 'channel',
           barMaxWidth: 36,
-          itemStyle: { color: CHART_COLORS.navy },
+          itemStyle: { color: CHART_COLORS.espresso },
           data: [Number(selectedStat.inStoreSales.toFixed(2))],
           label: {
             show: selectedStat.inStoreSales > 0,
@@ -209,7 +209,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
           type: 'bar',
           stack: 'channel',
           barMaxWidth: 36,
-          itemStyle: { color: CHART_COLORS.teal },
+          itemStyle: { color: CHART_COLORS.olive },
           data: [Number(selectedStat.onlineSales.toFixed(2))],
           label: {
             show: selectedStat.onlineSales > 0,
@@ -260,7 +260,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
                   aria-label="Select salesperson"
                   value={selectedPerson}
                   onChange={(e) => setSelectedPerson(e.target.value)}
-                  className="h-8 px-2.5 text-xs border border-[#E3E7EF] rounded-lg bg-white text-[#1B2233]"
+                  className="h-8 px-2.5 text-xs border border-[#E5D7C1] rounded-lg bg-white text-[#2B1B0E]"
                 >
                   {salespeople.map((sp) => (
                     <option key={sp.salesperson} value={sp.salesperson}>
@@ -287,16 +287,16 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
 
       {/* Leaderboard Table */}
       <section className="card-surface overflow-hidden">
-        <div className="px-5 py-4 border-b border-[#E3E7EF] flex flex-wrap items-center justify-between gap-2">
+        <div className="px-5 py-4 border-b border-[#E5D7C1] flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h3 className="text-[15px] font-semibold text-[#22308F]">
+            <h3 className="text-[15px] font-semibold text-[#533416]">
               Salesperson Leaderboard
             </h3>
-            <p className="text-xs text-[#5B6475]">
+            <p className="text-xs text-[#6B5744]">
               Ranked exclusively by Net Sales (CAD). Click a row to filter everywhere.
             </p>
           </div>
-          <span className="text-xs text-[#5B6475] tabular-nums">
+          <span className="text-xs px-2.5 py-0.5 rounded-md bg-[#EEDFC7] text-[#533416] font-semibold tabular-nums">
             {salespeople.length} salespeople
           </span>
         </div>
@@ -304,7 +304,7 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr className="bg-[#F5F7FB] border-b border-[#E3E7EF] text-xs font-semibold text-[#5B6475]">
+              <tr className="bg-[#F5EDE0] border-b border-[#E5D7C1] text-xs font-semibold text-[#6B5744]">
                 <th className="py-2.5 px-4 w-16">Rank</th>
                 <th className="py-2.5 px-3">Salesperson</th>
                 <th className="py-2.5 px-3 text-right">Net Sales (CAD)</th>
@@ -315,10 +315,10 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
                 <th className="py-2.5 px-4 text-right">Discount Rate</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EEF1F6]">
+            <tbody className="divide-y divide-[#EFE5D6]">
               {salespeople.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-8 text-center text-sm text-[#5B6475]">
+                  <td colSpan={8} className="py-8 text-center text-sm text-[#6B5744]">
                     No transactions match these filters
                   </td>
                 </tr>
@@ -330,26 +330,26 @@ export const SalespeoplePage: React.FC<SalespeoplePageProps> = ({
                       setSelectedPerson(sp.salesperson);
                       onToggleSalespersonFilter(sp.salesperson);
                     }}
-                    className={`cursor-pointer transition-colors hover:bg-[#F5F7FB] ${
-                      selectedPerson === sp.salesperson ? 'bg-[#F5F7FB]' : ''
+                    className={`cursor-pointer transition-colors hover:bg-[#FAF6EE] ${
+                      selectedPerson === sp.salesperson ? 'bg-[#EEDFC7]/50' : ''
                     }`}
                   >
-                    <td className="py-2.5 px-4 font-semibold text-[#22308F] tabular-nums">
+                    <td className="py-2.5 px-4 font-semibold text-[#8F5109] tabular-nums">
                       #{sp.rank}
                     </td>
-                    <td className="py-2.5 px-3 font-medium text-[#1B2233]">
+                    <td className="py-2.5 px-3 font-medium text-[#2B1B0E]">
                       {sp.salesperson}
                     </td>
                     <td className="py-2.5 px-3 text-right tabular-nums font-medium">
                       <ValueOrNa value={formatCAD(sp.sales)} />
                     </td>
-                    <td className="py-2.5 px-3 text-right tabular-nums text-[#5B6475]">
+                    <td className="py-2.5 px-3 text-right tabular-nums text-[#6B5744]">
                       <ValueOrNa value={formatPercent(sp.sharePct)} />
                     </td>
                     <td className="py-2.5 px-3 text-right tabular-nums">
                       {formatNumber(sp.orders)}
                       {sp.isSmallSample && (
-                        <span className="block text-[10px] text-[#C8372D]">small sample</span>
+                        <span className="block text-[10px] text-[#B83A28]">small sample</span>
                       )}
                     </td>
                     <td className="py-2.5 px-3 text-right tabular-nums">
